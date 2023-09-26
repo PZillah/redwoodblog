@@ -5,7 +5,7 @@ const AboutPage = () => {
     <>
       <MetaTags title="About" description="About page" />
 
-      <p>Header page stuff</p>
+      <p>About page stuff</p>
     </>
   )
 }
