@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import Article from 'src/components/Article'
 
 // QUERY, Loading, Empty and Failure definitions...
 
@@ -22,21 +22,7 @@ export const Failure = ({ error }) => (
 )
 
 export const Success = ({ articles }) => {
-  return (
-    <>
-      {articles.map((article) => (
-        <article key={article.id}>
-          <header>
-            <h2>
-              <Link to={routes.article({ id: article.id })}>
-                {article.title}
-              </Link>
-            </h2>
-          </header>
-          <p>{article.body}</p>
-          <div>Posted at: {article.createdAt}</div>
-        </article>
-      ))}
-    </>
-  )
+  return articles.map((article) => (
+    <Article key={article.id} article={article} />
+  ))
 }
