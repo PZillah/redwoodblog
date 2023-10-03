@@ -1,6 +1,7 @@
 import {
   FieldError,
   Form,
+  FormError,
   TextField,
   TextAreaField,
   Submit,
@@ -20,7 +21,7 @@ const CREATE_CONTACT = gql`
 
 const ContactPage = () => {
   const formMethods = useForm()
-  const [create, { loading }] = useMutation(CREATE_CONTACT, {
+  const [create, { loading, error }] = useMutation(CREATE_CONTACT, {
     onCompleted: () => {
       toast.success('Thank you for your submission!')
       formMethods.reset()
@@ -34,7 +35,8 @@ const ContactPage = () => {
     <>
       <MetaTags title="Contact" description="Contact page" />
       <Toaster />
-      <Form onSubmit={onSubmit} formMethods={formMethods}>
+      <Form onSubmit={onSubmit} formMethods={formMethods} error={error}>
+        <FormError error={error} wrapperClassName="form-error" />
         <Label name="name" errorClassName="error">
           Name
         </Label>
@@ -52,10 +54,10 @@ const ContactPage = () => {
           name="email"
           validation={{
             required: true,
-            pattern: {
-              value: /^[^@]+@[^.]+\..+$/,
-              message: 'Please enter a valid email address',
-            },
+            // pattern: {
+            //   value: /^[^@]+@[^.]+\..+$/,
+            //   message: 'Please enter a valid email address',
+            // },
           }}
           errorClassName="error"
         />
